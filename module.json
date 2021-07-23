@@ -1,0 +1,27 @@
+{
+    "main": "kraken",
+    "author": "Leif Jahnel",
+    "description": "A module to use for the Kraken Api",
+    "api_key": "api_key",
+    "api_sec": "api_sec",
+    "currency": "EUR",
+    "commands": [
+        {
+          "command-name": "user-balance",
+          "language": "DE",
+          "examples": [
+            "Wie viel ist mein Kraken Depot wert?",
+            "Wie ist meine Balance bei Kraken?"
+          ]
+        },
+        {
+          "command-name": "market-balance",
+          "language": "DE",
+          "examples": [
+            "Wie ist der Wert von Bitcoin",
+            "Wie hoch ist Bitcoin"
+          ]
+        }
+      ]
+    }
+    
