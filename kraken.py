@@ -5,11 +5,8 @@ import hashlib
 import hmac
 import base64
 import json
+import re
 
-currency_symbol = {
-    "EUR" : "€",
-    "USD" : "$"
-}
 
 def get_kraken_signature(urlpath, data, secret):
 
@@ -36,11 +33,18 @@ def exec(msg, user, predicted_cmd):
     api_key = cfg['api_key']
     api_sec = cfg['api_sec']
     your_currency = cfg['currency']
+    currency_symbol = cfg['currency_symbol']
+    cryptoticker = cfg['cryptoticker']
+    print(cryptoticker)
+    regex = r".*[von]\s"
+    name = re.sub(regex, "", msg)
+    crypto = cryptoticker[f'{name}']
+
+    print(command)
+    print(msg)
 
     status = requests.get('https://api.kraken.com/0/public/SystemStatus').json()
-
-    print(msg)
-    print(command)
+    print(status)
 
     if status['result']['status'] == "online":
         if command[0] == "user":
@@ -51,9 +55,10 @@ def exec(msg, user, predicted_cmd):
             api_key, api_sec).json()
             return {"cod": 200, "msg": f"Deine Kraken Balance ist {float(resp['result']['eb']):.2f}{currency_symbol[your_currency]}"}
         elif command[0] == "market":
-            resp = requests.get(f'https://api.kraken.com/0/public/Ticker?pair=XBT{your_currency}').json()
-            return {"cod": 200, "msg": f"Es ist zur Zeit {float(resp['result'][f'XXBTZ{your_currency}']['o']):.2f}{currency_symbol[your_currency]} wert"}
+            resp = requests.get(f'https://api.kraken.com/0/public/Ticker?pair={crypto}{your_currency}').json()
+            print(resp)
+            return {"cod": 200, "msg": f"{name} ist zur Zeit {float(resp['result'][f'{crypto}{your_currency}']['o']):.2f}{currency_symbol[your_currency]} wert"}
         else:
             return {"cod": 500, "msg": "Unbekannter Command"}
     else:
-        return {"cod": 404, "msg": "Kraken Api is not online"}
+        return {"cod": 404, "msg": "Kraken Api is not online", "reason": f"{status['result']}"}

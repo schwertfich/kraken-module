@@ -5,6 +5,16 @@
     "api_key": "api_key",
     "api_sec": "api_sec",
     "currency": "EUR",
+    "currency_symbol": {
+      "EUR" : "\u20ac",
+      "USD" : "$"
+    },
+    "cryptoticker":
+      {
+        "Bitcoin": "XBT",
+        "Ethereum": "ETH",
+        "Cardano": "ADA"
+      },
     "commands": [
         {
           "command-name": "user-balance",
@@ -19,9 +29,15 @@
           "language": "DE",
           "examples": [
             "Wie ist der Wert von Bitcoin",
-            "Wie hoch ist Bitcoin"
+            "Wie hoch ist der Kurs von Bitcoin",
+            "Preis von Ethereum",
+            "Wie steht Cardano",
+            "Bitcoin Cash",
+            "Ripple",
+            "Litecoin",
+            "Monero",
+            "Dogecoin"
           ]
         }
       ]
     }
-    
