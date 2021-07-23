@@ -1,7 +1,7 @@
 # Kraken-module for Leni
 Leni-PY or just [Leni](https://github.com/jonasnapierski/leni-py) is a home assistant backend. Based on Flask it is designed to quickly extend your own assistant with simple Python **modules**.
 
-This module uses the [KrakenI](https://docs.kraken.com/rest/) API to get cryptocurrency prices and show information of your Kraken account.
+This module uses the [Kraken](https://docs.kraken.com/rest/) API to get cryptocurrency prices and show information of your Kraken account.
 ## Installing
 To use this module you first need to install [Leni](https://github.com/jonasnapierski/leni-py) and follow the instructions there.
 ## Use
