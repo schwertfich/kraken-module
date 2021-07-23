@@ -56,8 +56,11 @@ def exec(msg, user, predicted_cmd):
             return {"cod": 200, "msg": f"Deine Kraken Balance ist {float(resp['result']['eb']):.2f}{currency_symbol[your_currency]}"}
         elif command[0] == "market":
             resp = requests.get(f'https://api.kraken.com/0/public/Ticker?pair={crypto}{your_currency}').json()
-            print(resp)
-            return {"cod": 200, "msg": f"{name} ist zur Zeit {float(resp['result'][f'{crypto}{your_currency}']['o']):.2f}{currency_symbol[your_currency]} wert"}
+            try:
+                result = float(resp['result'][f'X{crypto}Z{your_currency}']['o'])
+            except:
+                result = float(resp['result'][f'{crypto}{your_currency}']['o'])
+            return {"cod": 200, "msg": f"{name} ist zur Zeit {result:.2f}{currency_symbol[your_currency]} wert"}
         else:
             return {"cod": 500, "msg": "Unbekannter Command"}
     else:
