@@ -5,5 +5,9 @@ This module uses the [Kraken](https://docs.kraken.com/rest/) API to get cryptocu
 ## Installing
 To use this module you first need to install [Leni](https://github.com/jonasnapierski/leni-py) and follow the instructions there.
 ## Use
-If you only want to use the module to request public data, then you dont need an [API keypair](https://support.kraken.com/hc/en-us/articles/360000919966-How-to-generate-an-API-key-pair-). But  if you want to acsess private data form your account, you will need one.  Then you have to copy that keypair into the *kraken-module.json* file in the *config* folder.
-Now the module can be used. Currently you can request your account balance and the price of the cryptocurrencys available on Kraken.
+If you only want to use the module to request public data, then you dont need an [API keypair](https://support.kraken.com/hc/en-us/articles/360000919966-How-to-generate-an-API-key-pair-). But  if you want to acsess private data form your account, you will need one.
+Then you have to copy that keypair into the *kraken-module.json* file in the *config* folder.
+
+Now the module can be used.
+
+Currently you can request your account balance and the price of the cryptocurrencys available on Kraken.
