@@ -26,7 +26,7 @@ def kraken_request(uri_path, data, api_key, api_sec):
     req = requests.post((api_url + uri_path), headers=headers, data=data)
     return req
 
-def exec(msg, user, predicted_cmd):
+def exec(msg, user, predicted_cmd, hsf):
 
     cfg = user.get_module_config("kraken-module")
     command = predicted_cmd.split("-")
@@ -35,16 +35,19 @@ def exec(msg, user, predicted_cmd):
     your_currency = cfg['currency']
     currency_symbol = cfg['currency_symbol']
     cryptoticker = cfg['cryptoticker']
-    print(cryptoticker)
-    regex = r".*[von]\s"
-    name = re.sub(regex, "", msg)
-    crypto = cryptoticker[f'{name}']
-
-    print(command)
-    print(msg)
 
     status = requests.get('https://api.kraken.com/0/public/SystemStatus').json()
-    print(status)
+
+    crypto = ""
+    # Tries to find the crypo-currency name in the German syntax if this not succeed it tries it again in english
+    if command[-1] == "de":
+        regex = r".*[von]\s"
+        name = re.sub(regex, "", msg)
+        crypto = cryptoticker[f'{name}']
+    if command[-1] == "eng" or crypto == "":
+        regex = r".*[of]\s"
+        name = re.sub(regex, "", msg)
+        crypto = cryptoticker[f'{name}']
 
     if status['result']['status'] == "online":
         if command[0] == "user":
@@ -54,7 +57,7 @@ def exec(msg, user, predicted_cmd):
             "asset": your_currency},
             api_key, api_sec).json()
             return {"cod": 200, "msg": f"Deine Kraken Balance ist {float(resp['result']['eb']):.2f}{currency_symbol[your_currency]}"}
-        elif command[0] == "market":
+        elif command[0] == "market" and not crypto == "":
             resp = requests.get(f'https://api.kraken.com/0/public/Ticker?pair={crypto}{your_currency}').json()
             try:
                 result = float(resp['result'][f'X{crypto}Z{your_currency}']['o'])
@@ -62,6 +65,6 @@ def exec(msg, user, predicted_cmd):
                 result = float(resp['result'][f'{crypto}{your_currency}']['o'])
             return {"cod": 200, "msg": f"{name} ist zur Zeit {result:.2f}{currency_symbol[your_currency]} wert"}
         else:
-            return {"cod": 500, "msg": "Unbekannter Command"}
+            return {"cod": 406,"error_msg": "Not Acceptable", "msg": "Unknown Command or Unknown Crypto"}
     else:
-        return {"cod": 404, "msg": "Kraken Api is not online", "reason": f"{status['result']}"}
+        return {"cod": 408, "error_msg": "Request Timeout","msg": "Kraken Api is not online", "reason": f"{status['result']}"}
