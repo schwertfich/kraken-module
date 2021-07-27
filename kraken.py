@@ -26,7 +26,7 @@ def kraken_request(uri_path, data, api_key, api_sec):
     req = requests.post((api_url + uri_path), headers=headers, data=data)
     return req
 
-def exec(msg, user, predicted_cmd, hsf):
+def exec(msg, user, predicted_cmd):
 
     cfg = user.get_module_config("kraken-module")
     command = predicted_cmd.split("-")
