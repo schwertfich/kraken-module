@@ -6,8 +6,10 @@
     "api_sec": "api_sec",
     "currency": "EUR",
     "currency_symbol": {
-      "EUR" : "\u20ac",
-      "USD" : "$"
+      "EUR": "€",
+      "USD": "$",
+      "GBP": "£",
+      "JPY": "¥"
     },
     "cryptoticker":
       {
@@ -16,28 +18,58 @@
         "Cardano": "ADA"
       },
     "commands": [
-        {
-          "command-name": "user-balance",
+      {
+        "command-name": "user-balance-de",
+        "language": "DE",
+        "examples": [
+            "Wie viel ist mein Kraken Depot wert",
+            "Wie ist meine Balance bei Kraken",
+            "Wie viel ist mein Akkount wert"
+        ]
+      },
+      {
+          "command-name": "market-balance-de",
           "language": "DE",
           "examples": [
-            "Wie viel ist mein Kraken Depot wert?",
-            "Wie ist meine Balance bei Kraken?"
+              "Wie ist der Wert von Bitcoin",
+              "Wie hoch ist der Kurs von Bitcoin",
+              "Preis von Ethereum",
+              "Wie steht Cardano",
+              "Bitcoin Cash",
+              "Ripple",
+              "Litecoin",
+              "Monero",
+              "Dogecoin",
+              "SiaCoin",
+              "Tron"
           ]
-        },
-        {
-          "command-name": "market-balance",
-          "language": "DE",
+      },
+      {
+          "command-name": "user-balance-eng",
+          "language": "ENG",
           "examples": [
-            "Wie ist der Wert von Bitcoin",
-            "Wie hoch ist der Kurs von Bitcoin",
-            "Preis von Ethereum",
-            "Wie steht Cardano",
-            "Bitcoin Cash",
-            "Ripple",
-            "Litecoin",
-            "Monero",
-            "Dogecoin"
+              "How much is my Kraken deposit worth",
+              "How is my balance with Kraken"
           ]
-        }
-      ]
-    }
+      },
+      {
+          "command-name": "market-balance-eng",
+          "language": "ENG",
+          "examples": [
+              "What is the value of Bitcoin",
+              "How high is the price of Bitcoin",
+              "What is the rate of Bitcoin",
+              "Ethereum price",
+              "How Cardano stands",
+              "Bitcoin Cash",
+              "Ripple",
+              "Litecoin",
+              "Monero",
+              "Dogecoin",
+              "SiaCoin",
+              "Tron"
+          ]
+      }
+    ]
+}
+
